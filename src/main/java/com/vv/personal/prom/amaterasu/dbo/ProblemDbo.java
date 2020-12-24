@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.vv.personal.prom.amaterasu.Util.StringUtil.isValidInput;
+import static com.vv.personal.prom.amaterasu.util.StringUtil.isValidInput;
 
 /**
  * @author Vivek

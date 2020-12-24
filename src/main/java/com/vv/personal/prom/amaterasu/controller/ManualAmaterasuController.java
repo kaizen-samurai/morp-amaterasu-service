@@ -1,6 +1,6 @@
 package com.vv.personal.prom.amaterasu.controller;
 
-import com.vv.personal.prom.amaterasu.Util.StringUtil;
+import com.vv.personal.prom.amaterasu.util.StringUtil;
 import com.vv.personal.prom.artifactory.proto.Customer;
 import com.vv.personal.prom.artifactory.proto.Make;
 import com.vv.personal.prom.artifactory.proto.Problem;
@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static com.vv.personal.prom.amaterasu.Util.StringUtil.extractStringSet;
 import static com.vv.personal.prom.amaterasu.constants.Constants.EMPTY_LIST_INT;
 import static com.vv.personal.prom.amaterasu.constants.Constants.INT_RESPONSE_WONT_PROCESS;
 import static com.vv.personal.prom.amaterasu.dbo.CustomerDbo.verifyCustomerDetails;
 import static com.vv.personal.prom.amaterasu.dbo.MakeDbo.verifyMakeDetails;
 import static com.vv.personal.prom.amaterasu.dbo.ProblemDbo.verifyProblemDetails;
+import static com.vv.personal.prom.amaterasu.util.StringUtil.extractStringSet;
 
 /**
  * @author Vivek

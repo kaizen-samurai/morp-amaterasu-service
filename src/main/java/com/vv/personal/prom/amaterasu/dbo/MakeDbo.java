@@ -2,7 +2,7 @@ package com.vv.personal.prom.amaterasu.dbo;
 
 import com.vv.personal.prom.artifactory.proto.Make;
 
-import static com.vv.personal.prom.amaterasu.Util.StringUtil.isValidInput;
+import static com.vv.personal.prom.amaterasu.util.StringUtil.isValidInput;
 
 /**
  * @author Vivek

@@ -5,7 +5,7 @@ import com.vv.personal.prom.artifactory.proto.Customer;
 
 import java.util.List;
 
-import static com.vv.personal.prom.amaterasu.Util.StringUtil.isValidInput;
+import static com.vv.personal.prom.amaterasu.util.StringUtil.isValidInput;
 
 /**
  * @author Vivek

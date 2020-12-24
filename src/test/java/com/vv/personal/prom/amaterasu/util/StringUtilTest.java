@@ -1,4 +1,4 @@
-package com.vv.personal.prom.amaterasu.Util;
+package com.vv.personal.prom.amaterasu.util;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +7,8 @@ import org.junit.runners.JUnit4;
 import java.util.List;
 import java.util.Set;
 
-import static com.vv.personal.prom.amaterasu.Util.StringUtil.extractStringList;
-import static com.vv.personal.prom.amaterasu.Util.StringUtil.extractStringSet;
+import static com.vv.personal.prom.amaterasu.util.StringUtil.extractStringList;
+import static com.vv.personal.prom.amaterasu.util.StringUtil.extractStringSet;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

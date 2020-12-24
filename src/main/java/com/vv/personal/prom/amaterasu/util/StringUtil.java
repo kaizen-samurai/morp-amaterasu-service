@@ -1,4 +1,4 @@
-package com.vv.personal.prom.amaterasu.Util;
+package com.vv.personal.prom.amaterasu.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
