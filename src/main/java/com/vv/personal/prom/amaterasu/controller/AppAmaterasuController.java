@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 import static com.vv.personal.prom.amaterasu.constants.Constants.WONT_PROCESS_CUSTOMER;
+import static com.vv.personal.prom.amaterasu.constants.Constants.WONT_PROCESS_MAKE;
 import static com.vv.personal.prom.amaterasu.dbo.CustomerDbo.verifyCustomerDetails;
+import static com.vv.personal.prom.amaterasu.dbo.MakeDbo.verifyMakeDetails;
 
 /**
  * @author Vivek
@@ -31,7 +33,7 @@ public class AppAmaterasuController extends AbstractAmaterasu {
         //new customer obj should contain the following details: first name, last name and contact numbers
         //the customer id needs to be generated!
         StopWatch stopWatch = amaterasuConfig.stopWatch();
-        LOGGER.info("App-based addition of customer data here => {} {} {}", customer.getFirstName(), customer.getLastName(), customer.getContactNumbersList());
+        LOGGER.info("App-based addition of customer data here => '{}' '{}' '{}'", customer.getFirstName(), customer.getLastName(), customer.getContactNumbersList());
         if (!verifyCustomerDetails(
                 customer.getFirstName(),
                 customer.getLastName(),
@@ -46,6 +48,22 @@ public class AppAmaterasuController extends AbstractAmaterasu {
         LOGGER.info("App-based new customer add op over in {}ms, customer id: {}", stopWatch.getTime(TimeUnit.MILLISECONDS), newCustomer.getCustomerId());
         stopWatch = null;
         return newCustomer;
+    }
+
+    @GetMapping("/add/data/make")
+    @ApiOperation(value = "add new make details via app", hidden = true)
+    public Make addNewMakeViaApp(@RequestBody Make make) {
+        StopWatch stopWatch = amaterasuConfig.stopWatch();
+        LOGGER.info("App-based addition of make data here => '{}'", make.getMakeName());
+        if (!verifyMakeDetails(make.getMakeName())) {
+            LOGGER.warn("Invalid make details supplied, cannot proceed with make creation in server.");
+            return WONT_PROCESS_MAKE;
+        }
+        Make newMake = createAndSendNewMake(make.getMakeName());
+        stopWatch.stop();
+        LOGGER.info("App-based new make add op over in {}ms, make id: {}", stopWatch.getTime(TimeUnit.MILLISECONDS), newMake.getMakeId());
+        stopWatch = null;
+        return newMake;
     }
 
 }

@@ -33,4 +33,8 @@ public class StringUtil {
         return new ArrayList<>();
     }
 
+    public static boolean isValidInput(String name) {
+        return !name.strip().isEmpty();
+    }
+
 }
