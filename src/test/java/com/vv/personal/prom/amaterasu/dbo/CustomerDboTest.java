@@ -38,7 +38,7 @@ public class CustomerDboTest {
         Customer customer = generateCustomerProto(1887348836, "Vivek", "V", createDummyContacts(), 7845465, "AMT");
         System.out.println(customer);
         assertEquals("1234567890", customer.getContactNumbersList().get(0));
-        assertEquals(7845465, customer.getCompanyId());
+        assertEquals(7845465, customer.getCompany().getCompanyId());
     }
 
     @Test

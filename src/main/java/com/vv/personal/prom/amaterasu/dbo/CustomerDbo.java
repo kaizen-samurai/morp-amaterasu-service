@@ -4,20 +4,21 @@ import com.vv.personal.prom.artifactory.proto.Company;
 import com.vv.personal.prom.artifactory.proto.Customer;
 
 import java.util.List;
-import java.util.Objects;
+
+import static com.vv.personal.prom.amaterasu.Util.StringUtil.isValidInput;
 
 /**
  * @author Vivek
  * @since 23/12/20
  */
-public class CustomerDbo {
+public class CustomerDbo extends AbstractDbo {
 
     public static Integer generateCustomerId(String firstName, String lastName, List<String> contactNumbers) {
-        return Math.abs(Objects.hash(firstName, lastName, contactNumbers));
+        return generateId(firstName, lastName, contactNumbers);
     }
 
     public static Integer generateCompanyId(String companyName) {
-        return Math.abs(Objects.hash(companyName));
+        return generateId(companyName);
     }
 
     public static Customer generateCustomerProto(Integer customerId, String firstName, String lastName, List<String> contactNumbers,
@@ -50,6 +51,6 @@ public class CustomerDbo {
     }
 
     public static boolean isValidCompanyName(String name) {
-        return !name.strip().isEmpty();
+        return isValidInput(name);
     }
 }
