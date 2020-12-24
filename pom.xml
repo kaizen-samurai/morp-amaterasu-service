@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.vv.personal</groupId>
-    <artifactId>prom-amaterasu-service</artifactId>
+    <groupId>org.ks.trial</groupId>
+    <artifactId>morp-amaterasu-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>prom-amaterasu</name>
+    <name>morp-amaterasu</name>
     <packaging>jar</packaging>
     <description>Amaterasu service for handling client req to db</description>
 
