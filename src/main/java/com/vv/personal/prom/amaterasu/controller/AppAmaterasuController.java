@@ -1,6 +1,7 @@
 package com.vv.personal.prom.amaterasu.controller;
 
 import com.vv.personal.prom.artifactory.proto.Customer;
+import com.vv.personal.prom.artifactory.proto.Make;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
@@ -20,11 +21,11 @@ import static com.vv.personal.prom.amaterasu.dbo.CustomerDbo.verifyCustomerDetai
  * @since 23/12/20
  */
 @RestController("AppAmaterasuController")
-@RequestMapping("/prom/amaterasu/")
+@RequestMapping("/prom/amaterasu/app")
 public class AppAmaterasuController extends AbstractAmaterasu {
     private static final Logger LOGGER = LoggerFactory.getLogger(AppAmaterasuController.class);
 
-    @GetMapping("/add/data/app/customer")
+    @GetMapping("/add/data/customer")
     @ApiOperation(value = "add new customer details via app", hidden = true)
     public Customer addNewCustomerViaApp(@RequestBody Customer customer) {
         //new customer obj should contain the following details: first name, last name and contact numbers
@@ -35,12 +36,12 @@ public class AppAmaterasuController extends AbstractAmaterasu {
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getContactNumbersList(),
-                customer.getCompanyName())) {
+                customer.getCompany().getCompanyName())) {
             LOGGER.warn("Invalid customer details supplied, cannot proceed with customer creation in server.");
             return WONT_PROCESS_CUSTOMER;
         }
         Customer newCustomer = createAndSendNewCustomer(customer.getFirstName(), customer.getLastName(), customer.getContactNumbersList(),
-                customer.getCompanyName());
+                customer.getCompany().getCompanyName());
         stopWatch.stop();
         LOGGER.info("App-based new customer add op over in {}ms, customer id: {}", stopWatch.getTime(TimeUnit.MILLISECONDS), newCustomer.getCustomerId());
         stopWatch = null;

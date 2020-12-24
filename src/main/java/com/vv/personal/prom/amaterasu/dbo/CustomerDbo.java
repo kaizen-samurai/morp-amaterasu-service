@@ -1,5 +1,6 @@
 package com.vv.personal.prom.amaterasu.dbo;
 
+import com.vv.personal.prom.artifactory.proto.Company;
 import com.vv.personal.prom.artifactory.proto.Customer;
 
 import java.util.List;
@@ -26,6 +27,12 @@ public class CustomerDbo {
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .addAllContactNumbers(contactNumbers)
+                .setCompany(generateCompany(companyId, companyName))
+                .build();
+    }
+
+    public static Company generateCompany(int companyId, String companyName) {
+        return Company.newBuilder()
                 .setCompanyId(companyId)
                 .setCompanyName(companyName)
                 .build();

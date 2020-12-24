@@ -22,11 +22,11 @@ import static com.vv.personal.prom.amaterasu.dbo.CustomerDbo.verifyCustomerDetai
  * @since 24/12/20
  */
 @RestController("ManualAmaterasuController")
-@RequestMapping("/prom/amaterasu/")
+@RequestMapping("/prom/amaterasu/manual")
 public class ManualAmaterasuController extends AbstractAmaterasu {
     private static final Logger LOGGER = LoggerFactory.getLogger(ManualAmaterasuController.class);
 
-    @GetMapping("/add/data/manual/customer")
+    @GetMapping("/add/data/customer")
     @ApiOperation(value = "add new customer details manually")
     public Integer addManualNewCustomer(@RequestParam String firstName,
                                         @RequestParam String lastName,
