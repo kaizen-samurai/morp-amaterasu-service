@@ -2,6 +2,7 @@ package com.vv.personal.prom.amaterasu.controller;
 
 import com.vv.personal.prom.artifactory.proto.Customer;
 import com.vv.personal.prom.artifactory.proto.Make;
+import com.vv.personal.prom.artifactory.proto.Problems;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static com.vv.personal.prom.amaterasu.constants.Constants.WONT_PROCESS_CUSTOMER;
-import static com.vv.personal.prom.amaterasu.constants.Constants.WONT_PROCESS_MAKE;
+import static com.vv.personal.prom.amaterasu.constants.Constants.*;
 import static com.vv.personal.prom.amaterasu.dbo.CustomerDbo.verifyCustomerDetails;
 import static com.vv.personal.prom.amaterasu.dbo.MakeDbo.verifyMakeDetails;
+import static com.vv.personal.prom.amaterasu.dbo.ProblemDbo.verifyProblemDetailsProto;
 
 /**
  * @author Vivek
@@ -66,4 +69,21 @@ public class AppAmaterasuController extends AbstractAmaterasu {
         return newMake;
     }
 
+    @GetMapping("/add/data/problems")
+    @ApiOperation(value = "add new problems via app", hidden = true)
+    public Problems addNewProblemsViaApp(@RequestBody Problems problems) {
+        StopWatch stopWatch = amaterasuConfig.stopWatch();
+        LOGGER.info("App-based addition of problems data here => '{}'", problems.getProblemsList());
+
+        List<String> newProblemList = verifyProblemDetailsProto(new HashSet<>(problems.getProblemsList()));
+        if (newProblemList.isEmpty()) {
+            LOGGER.warn("Invalid problem details supplied, cannot proceed with problem creation in server.");
+            return WONT_PROCESS_PROBLEMS;
+        }
+        Problems newProblems = createAndSendNewProblems(newProblemList);
+        stopWatch.stop();
+        LOGGER.info("App-based new problems add op over in {}ms, make id: {}", stopWatch.getTime(TimeUnit.MILLISECONDS), newProblems.getProblemsList());
+        stopWatch = null;
+        return newProblems;
+    }
 }

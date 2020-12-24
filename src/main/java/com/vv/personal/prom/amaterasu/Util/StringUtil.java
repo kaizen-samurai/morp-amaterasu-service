@@ -3,9 +3,7 @@ package com.vv.personal.prom.amaterasu.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.vv.personal.prom.amaterasu.constants.Constants.COMMA_STR;
@@ -31,6 +29,14 @@ public class StringUtil {
             LOGGER.error("Failed to convert to string list for {}. ", data, e);
         }
         return new ArrayList<>();
+    }
+
+    public static Set<String> extractStringSet(String data, String splitter) {
+        return new HashSet<>(extractStringList(data, splitter));
+    }
+
+    public static Set<String> extractStringSet(String data) {
+        return new HashSet<>(extractStringList(data));
     }
 
     public static boolean isValidInput(String name) {

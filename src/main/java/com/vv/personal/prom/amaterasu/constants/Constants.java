@@ -3,6 +3,10 @@ package com.vv.personal.prom.amaterasu.constants;
 import com.vv.personal.prom.artifactory.proto.Customer;
 import com.vv.personal.prom.artifactory.proto.Make;
 import com.vv.personal.prom.artifactory.proto.Problem;
+import com.vv.personal.prom.artifactory.proto.Problems;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Vivek
@@ -16,6 +20,8 @@ public class Constants {
     public static final String DEFAULT_STR_INVALID = "-1";
 
     public static final int DEFAULT_INT_INVALID = -1;
+
+    public static final List<Integer> EMPTY_LIST_INT = new ArrayList<>(0);
 
     //RESPONSES
     public static final Integer INT_RESPONSE_WONT_PROCESS = -13; //N Proc
@@ -31,6 +37,9 @@ public class Constants {
     public static final Problem WONT_PROCESS_PROBLEM = Problem.newBuilder()
             .setProblemId(DEFAULT_INT_INVALID)
             .setProblemName(DEFAULT_STR_INVALID)
+            .build();
+    public static final Problems WONT_PROCESS_PROBLEMS = Problems.newBuilder()
+            .addProblems(WONT_PROCESS_PROBLEM)
             .build();
 
     //FORMATTERS
