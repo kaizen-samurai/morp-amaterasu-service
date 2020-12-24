@@ -15,23 +15,34 @@ public class CustomerDbo {
         return Math.abs(Objects.hash(firstName, lastName, contactNumbers));
     }
 
-    public static Customer generateCustomerProto(Integer customerId, String firstName, String lastName, List<String> contactNumbers) {
+    public static Integer generateCompanyId(String companyName) {
+        return Math.abs(Objects.hash(companyName));
+    }
+
+    public static Customer generateCustomerProto(Integer customerId, String firstName, String lastName, List<String> contactNumbers,
+                                                 Integer companyId, String companyName) {
         return Customer.newBuilder()
                 .setCustomerId(customerId)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .addAllContactNumbers(contactNumbers)
+                .setCompanyId(companyId)
+                .setCompanyName(companyName)
                 .build();
     }
 
-    public static boolean verifyCustomerDetails(String firstName, String lastName, List<String> contactNumbers) {
+    public static boolean verifyCustomerDetails(String firstName, String lastName, List<String> contactNumbers, String companyName) {
         return isValidName(firstName)
                 && isValidName(lastName)
-                && contactNumbers.size() == contactNumbers.stream().filter(contact -> contact.matches("[0-9]{10}+")).count();
+                && contactNumbers.size() == contactNumbers.stream().filter(contact -> contact.matches("[0-9]{10}+")).count()
+                && isValidCompanyName(companyName);
     }
 
     public static boolean isValidName(String name) {
         return name.strip().matches("[a-zA-Z .]+");
     }
 
+    public static boolean isValidCompanyName(String name) {
+        return !name.strip().isEmpty();
+    }
 }

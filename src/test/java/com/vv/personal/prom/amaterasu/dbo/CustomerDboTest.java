@@ -35,31 +35,33 @@ public class CustomerDboTest {
 
     @Test
     public void testGenerateCustomerProto() {
-        Customer customer = generateCustomerProto(1887348836, "Vivek", "V", createDummyContacts());
+        Customer customer = generateCustomerProto(1887348836, "Vivek", "V", createDummyContacts(), 7845465, "AMT");
         System.out.println(customer);
         assertEquals("1234567890", customer.getContactNumbersList().get(0));
+        assertEquals(7845465, customer.getCompanyId());
     }
 
     @Test
     public void testVerifyCustomerDetails() {
         List<String> contacts = createDummyContacts();
-        assertTrue(verifyCustomerDetails("Vivek", "V", contacts));
+        assertTrue(verifyCustomerDetails("Vivek", "V", contacts, "AMT"));
 
         contacts.remove(1);
         contacts.add("123425");
-        assertFalse(verifyCustomerDetails("Vivek", "V", contacts));
+        assertFalse(verifyCustomerDetails("Vivek", "V", contacts, "AMT"));
 
         contacts.clear();
         contacts.add("123456789a");
-        assertFalse(verifyCustomerDetails("Vivek", "V", contacts));
+        assertFalse(verifyCustomerDetails("Vivek", "V", contacts, "AMT"));
 
         contacts.clear();
         contacts.add("1232324 34");
-        assertFalse(verifyCustomerDetails("Vivek", "V", contacts));
+        assertFalse(verifyCustomerDetails("Vivek", "V", contacts, "AMT"));
 
         contacts = createDummyContacts();
-        assertFalse(verifyCustomerDetails("Vivek", "", contacts));
-        assertFalse(verifyCustomerDetails("Vivek", " ", contacts));
+        assertFalse(verifyCustomerDetails("Vivek", "", contacts, "AMT"));
+        assertFalse(verifyCustomerDetails("Vivek", " ", contacts, "AMT"));
+        assertFalse(verifyCustomerDetails("Vivek", " ", contacts, ""));
     }
 
     private List<String> createDummyContacts() {
