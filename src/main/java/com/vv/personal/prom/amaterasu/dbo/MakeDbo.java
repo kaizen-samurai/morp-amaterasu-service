@@ -21,7 +21,7 @@ public class MakeDbo extends AbstractDbo {
                 .build();
     }
 
-    public static boolean verifyMakeDetails(String make) {
+    public static boolean verifyMakeDetails(String make) { //maintaining convention
         return isValidMake(make);
     }
 
