@@ -33,9 +33,9 @@ public abstract class AbstractAmaterasu {
 
     protected Customer createAndSendNewCustomer(String firstName, String lastName, List<String> contactNumbers,
                                                 String companyName) {
-        firstName = firstName.strip().toLowerCase();
-        lastName = lastName.strip().toLowerCase();
-        companyName = companyName.strip().toLowerCase();
+        firstName = firstName.trim().toLowerCase();
+        lastName = lastName.trim().toLowerCase();
+        companyName = companyName.trim().toLowerCase();
         StopWatch stopWatch = amaterasuConfig.stopWatch();
         Integer customerId = generateCustomerId(firstName, lastName, contactNumbers);
         Integer companyId = generateCompanyId(companyName);
@@ -59,7 +59,7 @@ public abstract class AbstractAmaterasu {
     }
 
     protected Make createAndSendNewMake(String makeName) {
-        makeName = makeName.strip().toLowerCase();
+        makeName = makeName.trim().toLowerCase();
         StopWatch stopWatch = amaterasuConfig.stopWatch();
         Integer makeId = MakeDbo.generateMakeId(makeName);
         Make newMake = MakeDbo.generateMakeProto(makeId, makeName);

@@ -22,7 +22,7 @@ public class StringUtil {
     public static List<String> extractStringList(String data, String splitter) {
         try {
             return Arrays.stream(data.split(splitter))
-                    .map(String::strip)
+                    .map(String::trim)
                     .filter(s -> !s.isEmpty())
                     .collect(Collectors.toList());
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class StringUtil {
     }
 
     public static boolean isValidInput(String name) {
-        return !name.strip().isEmpty();
+        return !name.trim().isEmpty();
     }
 
 }

@@ -46,7 +46,7 @@ public class CustomerDbo extends AbstractDbo {
     }
 
     public static boolean isValidName(String name) {
-        return name.strip().matches("[a-zA-Z .]+");
+        return name.trim().matches("[a-zA-Z .]+");
     }
 
     public static boolean isValidCompanyName(String name) {

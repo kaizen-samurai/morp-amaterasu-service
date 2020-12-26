@@ -33,14 +33,14 @@ public class ProblemDbo extends AbstractDbo {
 
     public static List<String> verifyProblemDetailsProto(Collection<Problem> problems) { //maintaining convention
         return problems.stream()
-                .map(problem -> problem.getProblemName().strip().toLowerCase())
+                .map(problem -> problem.getProblemName().trim().toLowerCase())
                 .filter(ProblemDbo::verifyProblemDetails)
                 .collect(Collectors.toList());
     }
 
     public static List<String> verifyProblemDetails(Collection<String> problems) { //maintaining convention
         return problems.stream()
-                .map(problem -> problem.strip().toLowerCase())
+                .map(problem -> problem.trim().toLowerCase())
                 .filter(ProblemDbo::verifyProblemDetails)
                 .collect(Collectors.toList());
     }
