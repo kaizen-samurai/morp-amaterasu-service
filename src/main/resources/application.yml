@@ -1,16 +1,19 @@
 spring:
   application:
     name: morp-amaterasu-service
+    heroku: ${spring.application.name}.herokuapp.com
 
 server:
-  port: ${EUREKA_REGISTRATION_PORT:0}
+  port: ${EUREKA_REGISTRATION_PORT:0} #Supplied server.port in the ProcFile for injecting Heroku's own available port, as not all ports are open on the container
 
 eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:2011/eureka}
+  local: http://localhost:2011
   instance:
+    hostname: ${EUREKA_HOSTNAME:${eureka.local}} #EUREKA_HOSTNAME var set to => https://morp-eureka-service.herokuapp.com on herkou dashboard
     preferIpAddress: true
+  client:
+    service-url:
+      defaultZone: ${eureka.instance.hostname}/eureka
 
 feign:
   client:
