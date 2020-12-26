@@ -9,7 +9,7 @@ server:
 eureka:
   local: http://localhost:2011
   instance:
-    hostname: ${EUREKA_HOSTNAME:${eureka.local}} #EUREKA_HOSTNAME var set to => https://morp-eureka-service.herokuapp.com on herkou dashboard
+    hostname: ${EUREKA_HOSTNAME:${eureka.local}} #EUREKA_HOSTNAME var set to => https://morp-eureka-service.herokuapp.com on heroku dashboard
     preferIpAddress: true
   client:
     service-url:

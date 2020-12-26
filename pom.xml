@@ -110,7 +110,7 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>${heroku-maven.version}</version>
                 <configuration>
-                    <appName>morp-amaterasu-service</appName>
+                    <appName>${artifactId}</appName>
                 </configuration>
             </plugin>
         </plugins>
