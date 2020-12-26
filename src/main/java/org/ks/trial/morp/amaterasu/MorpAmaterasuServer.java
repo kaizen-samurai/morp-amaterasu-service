@@ -1,6 +1,5 @@
 package org.ks.trial.morp.amaterasu;
 
-import org.ks.trial.morp.amaterasu.constants.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
+import static org.ks.trial.morp.amaterasu.constants.Constants.*;
 
 @EnableEurekaClient
 @EnableFeignClients
@@ -47,14 +48,17 @@ public class MorpAmaterasuServer {
 
     @EventListener(ApplicationReadyEvent.class)
     public void firedUpAllCylinders() {
-        String host = Constants.LOCALHOST;
+        String host = LOCALHOST;
         try {
             host = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
             LOGGER.error("Failed to obtain ip address. ", e);
         }
-        String port = environment.getProperty(Constants.LOCAL_SPRING_PORT);
-        LOGGER.info("Amaterasu activation is complete, be ready to get burnt! Swagger running on: {}",
-                String.format(Constants.SWAGGER_UI_URL, host, port));
+        String port = environment.getProperty(LOCAL_SPRING_PORT);
+        String herokuHost = environment.getProperty(SPRING_APPLICATION_HEROKU);
+        LOGGER.info("Amaterasu activation is complete, be ready to get burnt! Expected Heroku Swagger running on: {}, exact url: {}",
+                String.format(HEROKU_SWAGGER_UI_URL, herokuHost),
+                String.format(SWAGGER_UI_URL, host, port));
     }
+
 }
